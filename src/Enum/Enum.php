@@ -14,8 +14,10 @@ abstract class Enum
         $this->scalar = $value;
     }
 
+    // phpcs:disable Generic.CodeAnalysis.UnusedFunctionParameter.Found
     final public static function __callStatic($label, $args)
     {
+        // phpcs:enable
         $class = get_called_class();
         if (! defined('static::' . $label)) {
             throw new BadMethodCallException;
