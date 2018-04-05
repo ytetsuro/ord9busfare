@@ -7,11 +7,11 @@ PHP version > 7
 # Setup
 
 ```shell
-composer dump-autoload
+composer install
 ```
 
 # Run
 
 ```shell
-php src/index.php
+composer test
 ```
