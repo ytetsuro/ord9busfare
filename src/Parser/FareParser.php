@@ -4,7 +4,7 @@ namespace NagoyaPHP\Parser;
 /**
  * 金額パーサー
  */
-interface PriceParser
+interface FareParser
 {
     /**
      * 金額をパースする

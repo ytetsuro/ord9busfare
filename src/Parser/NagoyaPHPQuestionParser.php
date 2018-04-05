@@ -9,7 +9,7 @@ use RuntimeException;
 /**
  * Nagoya.php #12用のパーサー
  */
-class NagoyaPHPQuestionParser implements PriceParser, PassangerParser
+class NagoyaPHPQuestionParser implements FareParser, PassangerParser
 {
     /**
      * 金額をパースする
