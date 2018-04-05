@@ -28,9 +28,9 @@ class PassangerCollection implements IteratorAggregate
     /**
      * ソートする
      *
-     * @param Callable $func
+     * @param callable $func
      */
-    public function orderBy(Callable $func)
+    public function orderBy(callable $func)
     {
         usort($this->collection, $func);
     }
