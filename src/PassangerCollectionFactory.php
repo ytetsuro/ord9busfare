@@ -23,7 +23,7 @@ class PassangerCollectionFactory
      *
      * @return PassangerCollection
      */
-    public function createByString(string $str): PassangerCollection
+    public function createByString(string $str) : PassangerCollection
     {
         $passanger_list = $this->parser->parsePassagnerList($str);
 
