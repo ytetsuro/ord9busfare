@@ -18,7 +18,7 @@ class NagoyaPHPQuestionParser implements FareParser, PassangerParser
      *
      * @return float
      */
-    public function parsePrice(string $str) : float
+    public function parseFare(string $str) : float
     {
         assert(strpos($str, ':') !== false);
 
