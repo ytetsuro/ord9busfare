@@ -2,13 +2,13 @@
 namespace NagoyaPHP\Entity;
 
 use NagoyaPHP\Enum\AgeType;
-use NagoyaPHP\Enum\Price;
+use NagoyaPHP\Enum\PriceType;
 
 /**
  * 乗客クラス
  *
  * @property AgeType $ageType
- * @property Price $price
+ * @property PriceType $priceType
  */
 class Passanger extends Entity
 {
@@ -22,13 +22,13 @@ class Passanger extends Entity
     /**
      * 料金区分
      *
-     * @var Price
+     * @var PriceType
      */
-    protected $price;
+    protected $priceType;
 
-    public function __construct(AgeType $age_type, Price $price)
+    public function __construct(AgeType $age_type, PriceType $price_type)
     {
-        parent::__construct(['ageType' => $age_type, 'price' => $price]);
+        parent::__construct(['ageType' => $age_type, 'priceType' => $price_type]);
     }
 
     /**
@@ -46,12 +46,12 @@ class Passanger extends Entity
     /**
      * 料金区分が一致するかを調べる
      *
-     * @param Price $price
+     * @param PriceType $price_type
      *
      * @return bool
      */
-    public function priceIs(Price $price)
+    public function priceTypeIs(PriceType $price_type)
     {
-        return $price === $this->price;
+        return $price_type === $this->priceType;
     }
 }

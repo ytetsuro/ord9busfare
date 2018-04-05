@@ -3,7 +3,7 @@ namespace NagoyaPHP\Parser;
 
 use NagoyaPHP\Entity\Passanger;
 use NagoyaPHP\Enum\AgeType;
-use NagoyaPHP\Enum\Price;
+use NagoyaPHP\Enum\PriceType;
 use RuntimeException;
 
 /**
@@ -43,7 +43,7 @@ class NagoyaPHPQuestionParser implements FareParser, PassangerParser
             assert(strlen($source) === 2);
             $result[] = new Passanger(
                 $this->getAgeTypeByString($source[0]),
-                $this->getPriceByString($source[1])
+                $this->getPriceTypeByString($source[1])
             );
         }
 
@@ -74,12 +74,12 @@ class NagoyaPHPQuestionParser implements FareParser, PassangerParser
      *
      * @param string $price_str
      *
-     * @return Price
+     * @return PriceType
      */
-    public function getPriceByString(string $price_str) : Price
+    public function getPriceTypeByString(string $price_str) : PriceType
     {
         // 今回はEnumの値と入力値が紐づくのでマップは作成しない
-        foreach (Price::values() as $price) {
+        foreach (PriceType::values() as $price) {
             if ($price->valueOf() === $price_str) {
                 return $price;
             }

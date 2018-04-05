@@ -59,7 +59,7 @@ class BusFareCalculator
     public function getDiscountedFare(float $fare, Passanger $passanger) : float
     {
         $age_discount = $this->rules->getFunction($passanger->ageType);
-        $price_discount = $this->rules->getFunction($passanger->price);
+        $price_discount = $this->rules->getFunction($passanger->priceType);
 
         return $price_discount($age_discount($fare));
     }
