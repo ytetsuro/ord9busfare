@@ -4,8 +4,8 @@ namespace NagoyaPHP\Calculator;
 /**
  * 乗客の運賃計算クラス
  */
-class PassangerFareCalculator extends Calculator {
-
+class PassangerFareCalculator extends Calculator
+{
     /**
      * 2で割って10の位を切り捨てた値を取得する
      *
@@ -13,7 +13,7 @@ class PassangerFareCalculator extends Calculator {
      *
      * @return float
      */
-    public function halfAndCeilTenPlace(float $price): float
+    public function halfAndCeilTenPlace(float $price) : float
     {
         return $this->halfAndCeil($price, 1);
     }
@@ -23,7 +23,7 @@ class PassangerFareCalculator extends Calculator {
      *
      * @return float
      */
-    public function zero(): float
+    public function zero() : float
     {
         return 0;
     }

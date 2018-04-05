@@ -1,13 +1,13 @@
 <?php
 namespace NagoyaPHP\Enum;
+
 use LogicException;
 use ReflectionClass;
 
 abstract class Enum
 {
-    private $scalar;
-
     protected static $instances = [];
+    private $scalar;
 
     private function __construct($value)
     {
@@ -22,11 +22,16 @@ abstract class Enum
         }
 
         $const = constant("$class::$label");
-        if ( ! isset(static::$instances[$label]) ) {
+        if (! isset(static::$instances[$label])) {
             static::$instances[$label] = new $class($const);
         }
 
         return static::$instances[$label];
+    }
+
+    final public function __toString()
+    {
+        return (string) $this->scalar;
     }
 
     final public static function values()
@@ -45,10 +50,5 @@ abstract class Enum
     final public function valueOf()
     {
         return $this->scalar;
-    }
-
-    final public function __toString()
-    {
-        return (string)$this->scalar;
     }
 }

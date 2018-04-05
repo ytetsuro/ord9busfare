@@ -1,17 +1,14 @@
 <?php
 namespace NagoyaPHP\Entity;
 
-use NagoyaPHP\Enum\Price;
 use NagoyaPHP\Enum\Age;
-use NagoyaPHP\Entity\Entity;
-
+use NagoyaPHP\Enum\Price;
 
 /**
  * 乗客クラス
  */
 class Passanger extends Entity
 {
-
     /**
      * 年齢区分
      *

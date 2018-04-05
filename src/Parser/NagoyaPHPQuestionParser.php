@@ -1,17 +1,15 @@
 <?php
 namespace NagoyaPHP\Parser;
 
-use NagoyaPHP\Parser\PriceParser;
-use NagoyaPHP\Parser\PassangerParser;
-use NagoyaPHP\Enum\Price;
-use NagoyaPHP\Enum\Age;
 use NagoyaPHP\Entity\Passanger;
+use NagoyaPHP\Enum\Age;
+use NagoyaPHP\Enum\Price;
 use RunTimeException;
 
 /**
  * Nagoya.php #12用のパーサー
  */
-class NagoyaPHPQuestionParser implements PriceParser,PassangerParser
+class NagoyaPHPQuestionParser implements PriceParser, PassangerParser
 {
     /**
      * 金額をパースする
@@ -20,10 +18,11 @@ class NagoyaPHPQuestionParser implements PriceParser,PassangerParser
      *
      * @return float
      */
-    public function parsePrice(string $str): float
+    public function parsePrice(string $str) : float
     {
-        assert(strpos($str, ':') !== FALSE);
-        return (float)explode(':', $str)[0];
+        assert(strpos($str, ':') !== false);
+
+        return (float) explode(':', $str)[0];
     }
 
     /**
@@ -33,9 +32,9 @@ class NagoyaPHPQuestionParser implements PriceParser,PassangerParser
      *
      * @return PassangerParser[]
      */
-    public function parsePassagnerList(string $str): array
+    public function parsePassagnerList(string $str) : array
     {
-        assert(strpos($str, ':') !== FALSE);
+        assert(strpos($str, ':') !== false);
         $passanger_chars = explode(':', $str, 2)[1];
         $sources = explode(',', $passanger_chars);
 
@@ -56,9 +55,9 @@ class NagoyaPHPQuestionParser implements PriceParser,PassangerParser
      *
      * @param string $age_str
      *
-     * @return  Age
+     * @return Age
      */
-    public function getAgeByString(string $age_str): Age
+    public function getAgeByString(string $age_str) : Age
     {
         // 今回はEnumの値と入力値が紐づくのでマップは作成しない
         foreach (Age::values() as $age) {
@@ -67,7 +66,7 @@ class NagoyaPHPQuestionParser implements PriceParser,PassangerParser
             }
         }
 
-        throw new RunTimeException('未定義の年齢区分が指定されています。:'.$age_str);
+        throw new RunTimeException('未定義の年齢区分が指定されています。:' . $age_str);
     }
 
     /**
@@ -77,7 +76,7 @@ class NagoyaPHPQuestionParser implements PriceParser,PassangerParser
      *
      * @return Price
      */
-    public function getPriceByString(string $price_str): Price
+    public function getPriceByString(string $price_str) : Price
     {
         // 今回はEnumの値と入力値が紐づくのでマップは作成しない
         foreach (Price::values() as $price) {
@@ -86,6 +85,6 @@ class NagoyaPHPQuestionParser implements PriceParser,PassangerParser
             }
         }
 
-        throw new RunTimeException('未定義の料金区分が指定されています。:'.$price_str);
+        throw new RunTimeException('未定義の料金区分が指定されています。:' . $price_str);
     }
 }

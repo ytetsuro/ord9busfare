@@ -1,8 +1,8 @@
 <?php
 namespace NagoyaPHP;
 
-use NagoyaPHP\Parser\PassangerParser;
 use NagoyaPHP\Entity\PassangerCollection;
+use NagoyaPHP\Parser\PassangerParser;
 
 /**
  * 乗客の集合クラス

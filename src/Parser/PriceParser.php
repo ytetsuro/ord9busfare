@@ -13,5 +13,5 @@ interface PriceParser
      *
      * @return float
      */
-    public function parsePrice(string $str): float;
+    public function parsePrice(string $str) : float;
 }

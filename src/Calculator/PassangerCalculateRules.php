@@ -1,17 +1,17 @@
 <?php
 namespace NagoyaPHP\Calculator;
 
-use SplObjectStorage;
 use NagoyaPHP\Enum\Age;
 use NagoyaPHP\Enum\Enum;
 use NagoyaPHP\Enum\Price;
+use SplObjectStorage;
 
-class PassangerCalculateRules {
-
+class PassangerCalculateRules
+{
     /**
      * 計算ルールのリスト
      *
-     * @var SplObjectStorage [Enum $key => Callable $value]
+     * @var SplObjectStorage [Enum => Callable $value]
      */
     private $rules;
 
@@ -19,9 +19,9 @@ class PassangerCalculateRules {
     {
         $calculator = new PassangerFareCalculator();
         $this->rules = new SplObjectStorage();
-        $this->rules[Age::CHILD()]    = [$calculator, 'halfAndCeilTenPlace'];
-        $this->rules[Age::INFANT()]   = [$calculator, 'halfAndCeilTenPlace'];
-        $this->rules[Price::WELFARE()]  = [$calculator, 'halfAndCeilTenPlace'];
+        $this->rules[Age::CHILD()] = [$calculator, 'halfAndCeilTenPlace'];
+        $this->rules[Age::INFANT()] = [$calculator, 'halfAndCeilTenPlace'];
+        $this->rules[Price::WELFARE()] = [$calculator, 'halfAndCeilTenPlace'];
         $this->rules[Price::HAS_PASS()] = [$calculator, 'zero'];
     }
 
@@ -30,11 +30,13 @@ class PassangerCalculateRules {
      *
      * @param Enum $enum
      *
-     * @return Callable
+     * @return callable
      */
-    public function getFunction(Enum $enum): Callable
+    public function getFunction(Enum $enum) : callable
     {
-        $result = function($price) {return $price;};
+        $result = function ($price) {
+            return $price;
+        };
 
         if (isset($this->rules[$enum])) {
             $result = $this->rules[$enum];

@@ -1,8 +1,8 @@
 <?php
 namespace NagoyaPHP\Entity;
 
-use NagoyaPHP\Enum\Age;
 use IteratorAggregate;
+use NagoyaPHP\Enum\Age;
 
 /**
  * 乗客の集合クラス
@@ -18,8 +18,8 @@ class PassangerCollection implements IteratorAggregate
 
     public function __construct(array $collection)
     {
-        assert(count($collection) === count(array_filter($collection, function($row) {
-            return $row instanceOf Passanger;
+        assert(count($collection) === count(array_filter($collection, function ($row) {
+            return $row instanceof Passanger;
         })));
 
         $this->collection = $collection;
@@ -44,10 +44,12 @@ class PassangerCollection implements IteratorAggregate
      */
     public function getByAge(Age $age)
     {
-        return new PassangerCollection(array_filter($this->collection,
-            function(Passanger $row) use($age) {
-            return $row->ageIs($age);
-        }));
+        return new self(array_filter(
+            $this->collection,
+            function (Passanger $row) use ($age) {
+                return $row->ageIs($age);
+            }
+        ));
     }
 
     /**
@@ -55,7 +57,7 @@ class PassangerCollection implements IteratorAggregate
      *
      * @return int
      */
-    public function length(): int
+    public function length() : int
     {
         return count($this->collection);
     }

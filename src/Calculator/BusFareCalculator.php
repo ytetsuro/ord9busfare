@@ -1,17 +1,16 @@
 <?php
 namespace NagoyaPHP\Calculator;
 
-use NagoyaPHP\Entity\PassangerCollection;
 use NagoyaPHP\Entity\Passanger;
+use NagoyaPHP\Entity\PassangerCollection;
 use NagoyaPHP\Enum\Age;
-use NagoyaPHP\Enum\Price;
 use SplObjectStorage;
 
 /**
  * バスの運賃計算機
  */
-class BusFareCalculator {
-
+class BusFareCalculator
+{
     /**
      * @var PassangerCalculateRules
      */
@@ -25,12 +24,12 @@ class BusFareCalculator {
     /**
      * 計算する
      *
-     * @param float $fare
+     * @param float               $fare
      * @param PassangerCollection $collection
      *
      * @return float
      */
-    public function calculate(float $fare, PassangerCollection $collection): float
+    public function calculate(float $fare, PassangerCollection $collection) : float
     {
         $total_fare = 0;
         $passanger_bill_list = new SplObjectStorage();
@@ -50,17 +49,33 @@ class BusFareCalculator {
     }
 
     /**
+     * 割引済みの運賃を取得する
+     *
+     * @param float     $fare
+     * @param Passanger $passanger
+     *
+     * @return float
+     */
+    public function getDiscountedFare(float $fare, Passanger $passanger) : float
+    {
+        $age_discount = $this->rules->getFunction($passanger->age);
+        $price_discount = $this->rules->getFunction($passanger->price);
+
+        return $price_discount($age_discount($fare));
+    }
+
+    /**
      * 無料幼児を設定する
      *
-     * @param SplObjectStorage $passanger_bill_list
+     * @param SplObjectStorage    $passanger_bill_list
      * @param PassangerCollection $collection
      */
     private function setFreeInfant(SplObjectStorage $passanger_bill_list, PassangerCollection $collection)
     {
-        $infant_freeable_count = $collection->getByAge(Age::ADULT())->length()*2; // @todo: ここメソッド分けるか2をプロパティ
+        $infant_freeable_count = $collection->getByAge(Age::ADULT())->length() * 2; // @todo: ここメソッド分けるか2をプロパティ
         $infant_collection = $collection->getByAge(Age::INFANT());
-        $infant_collection->orderBy(function($a, $b) use($passanger_bill_list) {
-            return ($passanger_bill_list[$a] < $passanger_bill_list[$b]) ? 1 : -1 ;
+        $infant_collection->orderBy(function ($a, $b) use ($passanger_bill_list) {
+            return ($passanger_bill_list[$a] < $passanger_bill_list[$b]) ? 1 : -1;
         });
 
         foreach ($infant_collection as $infant) {
@@ -69,21 +84,5 @@ class BusFareCalculator {
             }
             $passanger_bill_list[$infant] = 0;
         }
-    }
-
-    /**
-     * 割引済みの運賃を取得する
-     *
-     * @param float $fare
-     * @param Passanger $passanger
-     *
-     * @return float
-     */
-    public function getDiscountedFare(float $fare, Passanger $passanger): float
-    {
-        $age_discount = $this->rules->getFunction($passanger->age);
-        $price_discount = $this->rules->getFunction($passanger->price);
-
-        return $price_discount($age_discount($fare));
     }
 }

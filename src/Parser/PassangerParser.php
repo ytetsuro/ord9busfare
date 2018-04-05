@@ -13,5 +13,5 @@ interface PassangerParser
      *
      * @return Passanger[]
      */
-    public function parsePassagnerList(string $str): array;
+    public function parsePassagnerList(string $str) : array;
 }
