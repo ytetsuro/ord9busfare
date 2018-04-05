@@ -17,15 +17,16 @@ class PassangerCollectionFactory
     }
 
     /**
-     * 年齢区分からリストを取得する
+     * 文字列から乗客の集合クラスを取得する
      *
-     * @param Age $age
+     * @param string $str
      *
      * @return PassangerCollection
      */
-    public function createByString(string $str)
+    public function createByString(string $str): PassangerCollection
     {
         $passanger_list = $this->parser->parsePassagnerList($str);
+
         return new PassangerCollection($passanger_list);
     }
 }
