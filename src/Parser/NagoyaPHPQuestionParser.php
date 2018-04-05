@@ -2,7 +2,7 @@
 namespace NagoyaPHP\Parser;
 
 use NagoyaPHP\Entity\Passanger;
-use NagoyaPHP\Enum\Age;
+use NagoyaPHP\Enum\AgeType;
 use NagoyaPHP\Enum\Price;
 use RuntimeException;
 
@@ -42,7 +42,7 @@ class NagoyaPHPQuestionParser implements PriceParser, PassangerParser
         foreach ($sources as $source) {
             assert(strlen($source) === 2);
             $result[] = new Passanger(
-                $this->getAgeByString($source[0]),
+                $this->getAgeTypeByString($source[0]),
                 $this->getPriceByString($source[1])
             );
         }
@@ -53,20 +53,20 @@ class NagoyaPHPQuestionParser implements PriceParser, PassangerParser
     /**
      * 文字列から年齢区分を取得する
      *
-     * @param string $age_str
+     * @param string $age_type_str
      *
-     * @return Age
+     * @return AgeType
      */
-    public function getAgeByString(string $age_str) : Age
+    public function getAgeTypeByString(string $age_type_str) : AgeType
     {
         // 今回はEnumの値と入力値が紐づくのでマップは作成しない
-        foreach (Age::values() as $age) {
-            if ($age->valueOf() === $age_str) {
-                return $age;
+        foreach (AgeType::values() as $age_type) {
+            if ($age_type->valueOf() === $age_type_str) {
+                return $age_type;
             }
         }
 
-        throw new RuntimeException('未定義の年齢区分が指定されています。:' . $age_str);
+        throw new RuntimeException('未定義の年齢区分が指定されています。:' . $age_type_str);
     }
 
     /**

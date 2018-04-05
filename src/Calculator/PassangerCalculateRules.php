@@ -1,7 +1,7 @@
 <?php
 namespace NagoyaPHP\Calculator;
 
-use NagoyaPHP\Enum\Age;
+use NagoyaPHP\Enum\AgeType;
 use NagoyaPHP\Enum\Enum;
 use NagoyaPHP\Enum\Price;
 use SplObjectStorage;
@@ -19,8 +19,8 @@ class PassangerCalculateRules
     {
         $calculator = new PassangerFareCalculator();
         $this->rules = new SplObjectStorage();
-        $this->rules[Age::CHILD()] = [$calculator, 'halfAndCeilTenPlace'];
-        $this->rules[Age::INFANT()] = [$calculator, 'halfAndCeilTenPlace'];
+        $this->rules[AgeType::CHILD()] = [$calculator, 'halfAndCeilTenPlace'];
+        $this->rules[AgeType::INFANT()] = [$calculator, 'halfAndCeilTenPlace'];
         $this->rules[Price::WELFARE()] = [$calculator, 'halfAndCeilTenPlace'];
         $this->rules[Price::HAS_PASS()] = [$calculator, 'zero'];
     }

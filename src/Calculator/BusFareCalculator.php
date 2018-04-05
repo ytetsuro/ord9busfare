@@ -3,7 +3,7 @@ namespace NagoyaPHP\Calculator;
 
 use NagoyaPHP\Entity\Passanger;
 use NagoyaPHP\Entity\PassangerCollection;
-use NagoyaPHP\Enum\Age;
+use NagoyaPHP\Enum\AgeType;
 use SplObjectStorage;
 
 /**
@@ -58,7 +58,7 @@ class BusFareCalculator
      */
     public function getDiscountedFare(float $fare, Passanger $passanger) : float
     {
-        $age_discount = $this->rules->getFunction($passanger->age);
+        $age_discount = $this->rules->getFunction($passanger->ageType);
         $price_discount = $this->rules->getFunction($passanger->price);
 
         return $price_discount($age_discount($fare));
@@ -73,7 +73,7 @@ class BusFareCalculator
     private function setFreeInfant(SplObjectStorage $passanger_bill_list, PassangerCollection $collection)
     {
         $infant_freeable_count = $this->getInfrantFreeableCount($collection);
-        $infant_collection = $collection->getByAge(Age::INFANT());
+        $infant_collection = $collection->getByAgeType(AgeType::INFANT());
         $infant_collection->orderBy(function ($a, $b) use ($passanger_bill_list) {
             return $passanger_bill_list[$b] <=> $passanger_bill_list[$a];
         });
@@ -95,6 +95,6 @@ class BusFareCalculator
      */
     private function getInfrantFreeableCount(PassangerCollection $collection) : int
     {
-        return $collection->getByAge(Age::ADULT())->length() * 2;
+        return $collection->getByAgeType(AgeType::ADULT())->length() * 2;
     }
 }

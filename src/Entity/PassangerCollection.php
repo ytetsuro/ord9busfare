@@ -2,7 +2,7 @@
 namespace NagoyaPHP\Entity;
 
 use IteratorAggregate;
-use NagoyaPHP\Enum\Age;
+use NagoyaPHP\Enum\AgeType;
 
 /**
  * 乗客の集合クラス
@@ -38,16 +38,16 @@ class PassangerCollection implements IteratorAggregate
     /**
      * 年齢区分からリストを取得する
      *
-     * @param Age $age
+     * @param AgeType $age_type
      *
      * @return PassangerCollection
      */
-    public function getByAge(Age $age)
+    public function getByAgeType(AgeType $age_type)
     {
         return new self(array_filter(
             $this->collection,
-            function (Passanger $row) use ($age) {
-                return $row->ageIs($age);
+            function (Passanger $row) use ($age_type) {
+                return $row->ageTypeIs($age_type);
             }
         ));
     }
