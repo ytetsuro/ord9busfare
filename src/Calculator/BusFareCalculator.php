@@ -75,7 +75,7 @@ class BusFareCalculator
         $infant_freeable_count = $this->getInfrantFreeableCount($collection);
         $infant_collection = $collection->getByAge(Age::INFANT());
         $infant_collection->orderBy(function ($a, $b) use ($passanger_bill_list) {
-            return ($passanger_bill_list[$a] < $passanger_bill_list[$b]) ? 1 : -1;
+            return $passanger_bill_list[$b] <=> $passanger_bill_list[$a];
         });
 
         foreach ($infant_collection as $infant) {
