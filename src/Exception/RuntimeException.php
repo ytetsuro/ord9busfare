@@ -4,8 +4,10 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace ytetsruo\ord9busfare\Exception;
+namespace NagoyaPHP\Exception;
 
-class RuntimeException extends \RuntimeException
+use RuntimeException as CoreRunTimeException;
+
+class RuntimeException extends CoreRunTimeException
 {
 }

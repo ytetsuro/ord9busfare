@@ -6,6 +6,9 @@ use NagoyaPHP\Enum\Price;
 
 /**
  * 乗客クラス
+ *
+ * @property Age $age
+ * @property Price $price
  */
 class Passanger extends Entity
 {
@@ -25,8 +28,7 @@ class Passanger extends Entity
 
     public function __construct(Age $age, Price $price)
     {
-        $this->age = $age;
-        $this->price = $price;
+        parent::__construct(['age' => $age, 'price' => $price]);
     }
 
     /**

@@ -4,7 +4,7 @@ namespace NagoyaPHP\Parser;
 use NagoyaPHP\Entity\Passanger;
 use NagoyaPHP\Enum\Age;
 use NagoyaPHP\Enum\Price;
-use RunTimeException;
+use RuntimeException;
 
 /**
  * Nagoya.php #12用のパーサー
@@ -66,7 +66,7 @@ class NagoyaPHPQuestionParser implements PriceParser, PassangerParser
             }
         }
 
-        throw new RunTimeException('未定義の年齢区分が指定されています。:' . $age_str);
+        throw new RuntimeException('未定義の年齢区分が指定されています。:' . $age_str);
     }
 
     /**
@@ -85,6 +85,6 @@ class NagoyaPHPQuestionParser implements PriceParser, PassangerParser
             }
         }
 
-        throw new RunTimeException('未定義の料金区分が指定されています。:' . $price_str);
+        throw new RuntimeException('未定義の料金区分が指定されています。:' . $price_str);
     }
 }

@@ -4,8 +4,10 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace ytetsruo\ord9busfare\Exception;
+namespace NagoyaPHP\Exception;
 
-class LogicException extends \LogicException
+use LogicException as CoreLogicException;
+
+class LogicException extends CoreLogicException
 {
 }

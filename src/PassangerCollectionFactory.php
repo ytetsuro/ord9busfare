@@ -5,11 +5,14 @@ use NagoyaPHP\Entity\PassangerCollection;
 use NagoyaPHP\Parser\PassangerParser;
 
 /**
- * 乗客の集合クラス
+ * 乗客の集合クラスのファクトリ
  */
 class PassangerCollectionFactory
 {
-    private $praser;
+    /**
+     * @var PassangerParser
+     */
+    private $parser;
 
     public function __construct(PassangerParser $parser)
     {

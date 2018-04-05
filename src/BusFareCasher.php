@@ -11,26 +11,26 @@ use NagoyaPHP\Parser\PriceParser;
 class BusFareCasher
 {
     /**
-     * @var PassangerCalculateRules
+     * @var BusFareCalculator
      */
     private $calculator;
 
     /**
      * @var PriceParser
      */
-    private $price_parser;
+    private $priceParser;
 
     /**
      * @var PassangerCollectionFactory
      */
-    private $passanger_collection;
+    private $passangerCollectionFactory;
 
     public function __construct(PriceParser $price_parser, PassangerCollectionFactory $passanger_collection_factory)
     {
         $calculate_rule = new PassangerCalculateRules();
         $this->calculator = new BusFareCalculator($calculate_rule);
-        $this->price_parser = $price_parser;
-        $this->passanger_collection_factory = $passanger_collection_factory;
+        $this->priceParser = $price_parser;
+        $this->passangerCollectionFactory = $passanger_collection_factory;
     }
 
     /**
@@ -42,8 +42,8 @@ class BusFareCasher
      */
     public function getFare(string $input) : float
     {
-        $price = $this->price_parser->parsePrice($input);
-        $passanger_collection = $this->passanger_collection_factory->createByString($input);
+        $price = $this->priceParser->parsePrice($input);
+        $passanger_collection = $this->passangerCollectionFactory->createByString($input);
 
         return $this->calculator->calculate($price, $passanger_collection);
     }

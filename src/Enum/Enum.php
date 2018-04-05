@@ -1,6 +1,7 @@
 <?php
 namespace NagoyaPHP\Enum;
 
+use BadMethodCallException;
 use LogicException;
 use ReflectionClass;
 
@@ -47,7 +48,7 @@ abstract class Enum
         $ref = new ReflectionClass($class);
         $consts = $ref->getConstants();
         $result = [];
-        foreach ($consts as $const_name => $value) {
+        foreach (array_keys($consts) as $const_name) {
             $result[] = static::$const_name();
         }
 
