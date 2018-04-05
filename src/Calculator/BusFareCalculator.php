@@ -72,7 +72,7 @@ class BusFareCalculator
      */
     private function setFreeInfant(SplObjectStorage $passanger_bill_list, PassangerCollection $collection)
     {
-        $infant_freeable_count = $this->getInfrantFreeableCount();
+        $infant_freeable_count = $this->getInfrantFreeableCount($collection);
         $infant_collection = $collection->getByAge(Age::INFANT());
         $infant_collection->orderBy(function ($a, $b) use ($passanger_bill_list) {
             return ($passanger_bill_list[$a] < $passanger_bill_list[$b]) ? 1 : -1;
@@ -89,9 +89,11 @@ class BusFareCalculator
     /**
      * 無料にできる幼児の数を取得する
      *
+     * @param PassangerCollection $collection
+     *
      * @return int
      */
-    private function getInfrantFreeableCount() : int
+    private function getInfrantFreeableCount(PassangerCollection $collection) : int
     {
         return $collection->getByAge(Age::ADULT())->length() * 2;
     }
