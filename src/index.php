@@ -1,11 +1,15 @@
 <?php
 require_once __DIR__ . "/../vendor/autoload.php";
 
-function test($str, $actual){
-    $bus = new Bus\Bus();
-    $kekka = $bus->parseAndCalc($str);
-    if ((string)$kekka !== $actual) {
-        throw new LogicException('仕様通りの実装ではありません。計算結果 -> ' . $kekka . ' : 本当の値 -> '. $actual);
+function test($str, $expected){
+    $parser = new NagoyaPHP\Parser\NagoyaPHPQuestionParser();
+    $factory = new NagoyaPHP\PassangerCollectionFactory($parser);
+    $cacher = new NagoyaPHP\BusFareCasher($parser, $factory);
+
+    $actual = $cacher->getFare($str);
+
+    if ($expected !== (string)$actual) {
+        throw new LogicException('仕様通りの実装ではありません。計算結果 -> ' . $actual . ' : 本当の値 -> '. $expected.' string :'.$str);
     }
 }
 

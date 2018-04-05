@@ -1,8 +1,8 @@
 <?php
-namespace Enity;
+namespace NagoyaPHP\Entity;
 
 /**
- * カスタムオブジェクト（親クラス）
+ * カスタムオブジェクト
  */
 abstract class Entity
 {
