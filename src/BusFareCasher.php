@@ -42,9 +42,9 @@ class BusFareCasher
      */
     public function getFare(string $input) : float
     {
-        $price = $this->fareParser->parsePrice($input);
+        $base_fare = $this->fareParser->parsePrice($input);
         $passanger_collection = $this->passangerCollectionFactory->createByString($input);
 
-        return $this->calculator->calculate($price, $passanger_collection);
+        return $this->calculator->calculate($base_fare, $passanger_collection);
     }
 }

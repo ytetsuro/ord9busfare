@@ -24,18 +24,18 @@ class BusFareCalculator
     /**
      * 計算する
      *
-     * @param float               $fare
+     * @param float               $base_fare
      * @param PassangerCollection $collection
      *
      * @return float
      */
-    public function calculate(float $fare, PassangerCollection $collection) : float
+    public function calculate(float $base_fare, PassangerCollection $collection) : float
     {
         $total_fare = 0;
         $passanger_bill_list = new SplObjectStorage();
 
         foreach ($collection as $passanger) {
-            $passanger_bill_list[$passanger] = $this->getDiscountedFare($fare, $passanger);
+            $passanger_bill_list[$passanger] = $this->getDiscountedFare($base_fare, $passanger);
         }
         $this->setFreeInfant($passanger_bill_list, $collection);
 
