@@ -11,7 +11,7 @@ class PassangerCalculateRules
     /**
      * 計算ルールのリスト
      *
-     * @var SplObjectStorage [Enum => Callable $value]
+     * @var SplObjectStorage [Enum => Callable]
      */
     private $rules;
 
