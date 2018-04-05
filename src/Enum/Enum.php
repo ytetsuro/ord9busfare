@@ -17,8 +17,8 @@ abstract class Enum
     final public static function __callStatic($label, $args)
     {
         $class = get_called_class();
-        if (! defined('static::'.$label)) {
-            throw new LogicException($label. $class);
+        if (! defined('static::' . $label)) {
+            throw new BadMethodCallException;
         }
 
         $const = constant("$class::$label");
@@ -27,6 +27,11 @@ abstract class Enum
         }
 
         return static::$instances[$label];
+    }
+
+    public function __clone()
+    {
+        throw new LogicException;
     }
 
     final public function __toString()
