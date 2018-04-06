@@ -4,7 +4,7 @@ namespace NagoyaPHP\Calculator;
 /**
  * 乗客の運賃計算クラス
  */
-class PassangerFareCalculator extends Calculator
+class PassengerFareCalculator extends Calculator
 {
     /**
      * 2で割って10の位を切り捨てた値を取得する

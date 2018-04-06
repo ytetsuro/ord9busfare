@@ -6,7 +6,7 @@ use NagoyaPHP\Enum\Enum;
 use NagoyaPHP\Enum\PriceType;
 use SplObjectStorage;
 
-class PassangerCalculateRules
+class PassengerCalculateRules
 {
     /**
      * 計算ルールのリスト
@@ -17,7 +17,7 @@ class PassangerCalculateRules
 
     public function __construct()
     {
-        $calculator = new PassangerFareCalculator();
+        $calculator = new PassengerFareCalculator();
         $this->rules = new SplObjectStorage();
         $this->rules[AgeType::CHILD()] = [$calculator, 'halfAndCeilTenPlace'];
         $this->rules[AgeType::INFANT()] = [$calculator, 'halfAndCeilTenPlace'];

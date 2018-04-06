@@ -10,7 +10,7 @@ use NagoyaPHP\Enum\PriceType;
  * @property AgeType $ageType
  * @property PriceType $priceType
  */
-class Passanger extends Entity
+class Passenger extends Entity
 {
     /**
      * 年齢区分

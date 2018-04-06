@@ -4,14 +4,14 @@ namespace NagoyaPHP\Parser;
 /**
  * 乗客パーサー
  */
-interface PassangerParser
+interface PassengerParser
 {
     /**
      * 乗客リストを取得する
      *
      * @param string $str
      *
-     * @return array Passanger[]
+     * @return array Passenger[]
      */
     public function parsePassagnerList(string $str) : array;
 }

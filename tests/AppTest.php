@@ -11,7 +11,7 @@ class AppTest extends TestCase
     public function setUp()
     {
         $parser = new NagoyaPHPQuestionParser();
-        $factory = new PassangerCollectionFactory($parser);
+        $factory = new PassengerCollectionFactory($parser);
         $this->obj = new BusFareCasher($parser, $factory);
     }
 

@@ -1,7 +1,7 @@
 <?php
 namespace NagoyaPHP\Parser;
 
-use NagoyaPHP\Entity\Passanger;
+use NagoyaPHP\Entity\Passenger;
 use NagoyaPHP\Enum\AgeType;
 use NagoyaPHP\Enum\PriceType;
 use RuntimeException;
@@ -9,7 +9,7 @@ use RuntimeException;
 /**
  * Nagoya.php #12用のパーサー
  */
-class NagoyaPHPQuestionParser implements FareParser, PassangerParser
+class NagoyaPHPQuestionParser implements FareParser, PassengerParser
 {
     /**
      * 金額をパースする
@@ -30,18 +30,18 @@ class NagoyaPHPQuestionParser implements FareParser, PassangerParser
      *
      * @param string $str
      *
-     * @return PassangerParser[]
+     * @return PassengerParser[]
      */
     public function parsePassagnerList(string $str) : array
     {
         assert(strpos($str, ':') !== false);
-        $passanger_chars = explode(':', $str, 2)[1];
-        $sources = explode(',', $passanger_chars);
+        $passenger_chars = explode(':', $str, 2)[1];
+        $sources = explode(',', $passenger_chars);
 
         $result = [];
         foreach ($sources as $source) {
             assert(strlen($source) === 2);
-            $result[] = new Passanger(
+            $result[] = new Passenger(
                 $this->getAgeTypeByString($source[0]),
                 $this->getPriceTypeByString($source[1])
             );

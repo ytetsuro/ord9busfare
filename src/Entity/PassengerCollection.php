@@ -7,19 +7,19 @@ use NagoyaPHP\Enum\AgeType;
 /**
  * 乗客の集合クラス
  */
-class PassangerCollection implements IteratorAggregate
+class PassengerCollection implements IteratorAggregate
 {
     /**
      * 乗客リスト
      *
-     * @var Passanger[]
+     * @var Passenger[]
      */
     private $collection = [];
 
     public function __construct(array $collection)
     {
         assert(count($collection) === count(array_filter($collection, function ($row) {
-            return $row instanceof Passanger;
+            return $row instanceof Passenger;
         })));
 
         $this->collection = $collection;
@@ -40,13 +40,13 @@ class PassangerCollection implements IteratorAggregate
      *
      * @param AgeType $age_type
      *
-     * @return PassangerCollection
+     * @return PassengerCollection
      */
     public function getByAgeType(AgeType $age_type)
     {
         return new self(array_filter(
             $this->collection,
-            function (Passanger $row) use ($age_type) {
+            function (Passenger $row) use ($age_type) {
                 return $row->ageTypeIs($age_type);
             }
         ));
@@ -64,8 +64,8 @@ class PassangerCollection implements IteratorAggregate
 
     public function getIterator()
     {
-        foreach ($this->collection as $passanger) {
-            yield $passanger;
+        foreach ($this->collection as $passenger) {
+            yield $passenger;
         }
     }
 }

@@ -2,7 +2,7 @@
 namespace NagoyaPHP;
 
 use NagoyaPHP\Calculator\BusFareCalculator;
-use NagoyaPHP\Calculator\PassangerCalculateRules;
+use NagoyaPHP\Calculator\PassengerCalculateRules;
 use NagoyaPHP\Parser\FareParser;
 
 /**
@@ -21,16 +21,16 @@ class BusFareCasher
     private $fareParser;
 
     /**
-     * @var PassangerCollectionFactory
+     * @var PassengerCollectionFactory
      */
-    private $passangerCollectionFactory;
+    private $passengerCollectionFactory;
 
-    public function __construct(FareParser $fare_parser, PassangerCollectionFactory $passanger_collection_factory)
+    public function __construct(FareParser $fare_parser, PassengerCollectionFactory $passenger_collection_factory)
     {
-        $calculate_rule = new PassangerCalculateRules();
+        $calculate_rule = new PassengerCalculateRules();
         $this->calculator = new BusFareCalculator($calculate_rule);
         $this->fareParser = $fare_parser;
-        $this->passangerCollectionFactory = $passanger_collection_factory;
+        $this->passengerCollectionFactory = $passenger_collection_factory;
     }
 
     /**
@@ -43,8 +43,8 @@ class BusFareCasher
     public function getFare(string $input) : float
     {
         $base_fare = $this->fareParser->parseFare($input);
-        $passanger_collection = $this->passangerCollectionFactory->createByString($input);
+        $passenger_collection = $this->passengerCollectionFactory->createByString($input);
 
-        return $this->calculator->calculate($base_fare, $passanger_collection);
+        return $this->calculator->calculate($base_fare, $passenger_collection);
     }
 }
